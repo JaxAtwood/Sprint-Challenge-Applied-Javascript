@@ -11,8 +11,11 @@
 
 axios.get("https://lambda-times-backend.herokuapp.com/topics")
 .then(res => {
-    console.log(res.data)
-    topics.appendChild(createTab(res.data));
+    console.log(res.data.topics)
+   
+    res.data.topics.forEach(topic => {
+        topics.appendChild(createTab(topic));
+    })
 })
 .catch(err => {
     console.log(err);
@@ -26,9 +29,7 @@ function createTab(object) {
 
     tab.classList.add("tab");
 
-    tab.textContent = object.topics;
+    tab.textContent = object;
 
-    object.map(stupid => {
-        topics.appendChild(createTab(stupid))
-    })
+    return tab;
 }
